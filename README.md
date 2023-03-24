@@ -22,7 +22,7 @@ This turborepo has some additional tools already setup for you:
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
 
-### Use template
+### Bootstrap template
 
 To bootstrap the app with this template, run the following command:
 
@@ -49,16 +49,14 @@ To build all apps and packages, run the following command:
 npm run build
 ```
 
-## Learn More about Next.js
+## Learn more about Next.js
 
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Other useful Links
+## Other useful links
 
 Integration docs
 
@@ -74,5 +72,5 @@ Design concepts inspired by
 
 ---
 
-No confusing license here. Be kind and help others learn:  
+**No confusing license here. Be kind and help others learn.**  
 You are free to use this code as inspiration. Please do not copy it directly. Crediting the author or resource is appreciated.
