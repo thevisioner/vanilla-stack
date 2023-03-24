@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Sprinkles, sprinkles } from "@/styles/sprinkles.css";
 import * as styles from "./Stack.css";
 
 type StackProps = {
@@ -7,7 +8,7 @@ type StackProps = {
   /** Horizontal alignment of children */
   align?: "start" | "end" | "center";
   /** The spacing between children */
-  gap?: "s" | "m" | "l";
+  gap?: Sprinkles["rowGap"];
   /** Reverse the render order of child items */
   reverse?: boolean;
   // hidden core props
@@ -32,7 +33,7 @@ export default function Stack({
   const classNames = clsx(
     styles.base,
     align && styles.align[align],
-    gap && styles.gap[gap],
+    gap && sprinkles({ rowGap: gap }),
     reverse && styles.reverse,
     className
   );

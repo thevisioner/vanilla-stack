@@ -1,3 +1,4 @@
+import path from "path";
 import type { StorybookConfig } from "@storybook/nextjs";
 import { VanillaExtractPlugin } from "@vanilla-extract/webpack-plugin";
 
@@ -13,6 +14,13 @@ const config: StorybookConfig = {
     options: {},
   },
   webpackFinal: async (config) => {
+    config.resolve = {
+      ...(config.resolve ?? {}),
+      alias: {
+        ...(config.resolve?.alias ?? {}),
+        "@": path.resolve(__dirname, "../src"),
+      },
+    };
     config.plugins?.push(new VanillaExtractPlugin());
     return config;
   },
