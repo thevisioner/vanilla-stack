@@ -1,7 +1,13 @@
 {
   "name": "vanilla-stack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
+  "description": "A Next.js web starter template for personal use",
+  "author": {
+    "name": "Raimonds Sarkanbardis",
+    "email": "raimonds.sarkanbardis@gmail.com",
+    "url": "https://visioner.dev/"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
@@ -19,7 +25,7 @@
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=16.0.0"
   },
   "dependencies": {},
   "packageManager": "npm@9.2.0"

@@ -1,16 +1,14 @@
-# Turborepo starter
+# vanilla-stack starter
 
-This is an official npm starter turborepo.
+This is a [Next.js](https://nextjs.org/) web starter template for personal use.
 
 ## What's inside?
 
-This turborepo uses [npm](https://www.npmjs.com/) as a package manager. It includes the following packages/apps:
+This monorepo is managed by [Turborepo](https://turbo.build/repo) and [npm](https://www.npmjs.com/). It includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `web`: a [Next.js](https://nextjs.org/) app with [Storybook](https://storybook.js.org/) and [vanilla-extract](https://vanilla-extract.style/) integrations
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
@@ -24,50 +22,57 @@ This turborepo has some additional tools already setup for you:
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
 
-### Build
+### Use template
 
-To build all apps and packages, run the following command:
+To bootstrap the app with this template, run the following command:
 
-```
-cd my-turborepo
-npm run build
+```bash
+npx create-next-app@latest -e [github-url]
 ```
 
 ### Develop
 
-To develop all apps and packages, run the following command:
+To develop, run the following command:
 
-```
-cd my-turborepo
+```bash
+# for next app
 npm run dev
+# for storybook
+npm run storybook
 ```
 
-### Remote Caching
+### Build
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+To build all apps and packages, run the following command:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```bash
+npm run build
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Learn More about Next.js
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+To learn more about Next.js, take a look at the following resources:
 
-```
-npx turbo link
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Useful Links
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-Learn more about the power of Turborepo:
+## Other useful Links
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+Integration docs
+
+- [Storybook Docs](https://storybook.js.org/docs/react/get-started/install)
+- [vanilla-extract Docs](https://vanilla-extract.style/documentation/getting-started)
+
+Design concepts inspired by
+
+- [Shopify Polaris](https://polaris.shopify.com/)
+- [Material Design 3](https://m3.material.io/)
+- [Open Props](https://open-props.style/)
+- [Utopia Fluid Responsive Design](https://utopia.fyi/)
+
+---
+
+No confusing license here. Be kind and help others learn:  
+You are free to use this code as inspiration. Please do not copy it directly. Crediting the author or resource is appreciated.
