@@ -38,15 +38,15 @@ const composedSpacingTokenNames = [
   ...spacingCustomPairs,
 ] as const;
 
-type SpacingKey = typeof spacingTokenNames[number];
-type ComposedSpacingKey = typeof composedSpacingTokenNames[number];
+type SpacingKey = (typeof spacingTokenNames)[number];
+export type SpacingSpaceKey = (typeof composedSpacingTokenNames)[number];
 
 type SpacingRule = [
-  ComposedSpacingKey,
+  SpacingSpaceKey,
   `calc(${string} + ${number} * var(--fluid-ratio))`
 ];
 
-const generateSpacingRule = (key: ComposedSpacingKey): SpacingRule => {
+const generateSpacingRule = (key: SpacingSpaceKey): SpacingRule => {
   if (key.includes("-")) {
     const [key1, key2] = key.split("-") as SpacingKey[];
     const value1 = spacingTokenValues[spacingTokenNames.indexOf(key1)];

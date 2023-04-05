@@ -8,7 +8,7 @@ import { minViewportWidth, maxViewportWidth } from "./settings";
 import { spacingContract, spacingTokens } from "./space.css";
 import { typeContract, typeTokens } from "./type.css";
 
-// Create a contract of globally scoped variable names
+// Creates a contract of globally scoped variable names
 export const fluidVars = createGlobalThemeContract({
   vw: "fluid-vw",
   ratio: "fluid-ratio",
