@@ -2,16 +2,7 @@ import {
   createGlobalThemeContract,
   createGlobalTheme,
 } from "@vanilla-extract/css";
-import {
-  color,
-  screen,
-  type,
-  depth,
-  shadow,
-  motion,
-  shape,
-  state,
-} from "@/styles/tokens";
+import { tokens } from "@/styles";
 
 const camelToKebabCase = (s: string) =>
   s.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
@@ -24,37 +15,23 @@ const camelToKebabCase = (s: string) =>
 
 const themeVars = createGlobalThemeContract(
   {
-    color,
-    screen,
-    type,
-    depth,
-    shadow,
-    motion,
-    shape,
-    state,
+    ...tokens,
   },
   (_value, path) => path.map(camelToKebabCase).join("-")
 );
 
 createGlobalTheme(":root", themeVars, {
-  color,
-  screen,
-  type,
-  shape,
-  depth,
-  shadow,
-  motion,
-  state,
+  ...tokens,
 });
 
 const fontVars = createGlobalThemeContract({
-  primary: "font-primary",
-  secondary: "font-secondary",
+  body: "font-body",
+  display: "font-display",
 });
 
 createGlobalTheme("#__app", fontVars, {
-  primary: "var(--font-dm-sans)",
-  secondary: "var(--font-shrikhand)",
+  body: "var(--font-inter)",
+  display: "var(--font-lexend)",
 });
 
 export const vars = {

@@ -1,6 +1,5 @@
 import { defineProperties, createSprinkles } from "@vanilla-extract/sprinkles";
-import { fluid } from "@/styles/fluid";
-import { vars } from "@/styles/theme.css";
+import { fluid, vars } from "@/styles";
 
 const spacingProperties = defineProperties({
   properties: {
