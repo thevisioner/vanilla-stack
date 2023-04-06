@@ -23,23 +23,9 @@ const children = [
 type Story = StoryObj<typeof Stack>;
 
 // More on writing stories with args: https://storybook.js.org/docs/7.0/react/writing-stories/args
-export const SmallGap: Story = {
+export const Gap: Story = {
   args: {
+    children,
     gap: "s",
-    children,
-  },
-};
-
-export const MediumGap: Story = {
-  args: {
-    gap: "m",
-    children,
-  },
-};
-
-export const LargeGap: Story = {
-  args: {
-    gap: "l",
-    children,
   },
 };
