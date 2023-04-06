@@ -4,6 +4,8 @@ import * as styles from "./Text.css";
 type TextProps = {
   /** The element type. Defaults to 'p'. */
   as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "legend";
+  /** HTML id attribute. */
+  id?: string;
   /** Adjust horizontal alignment of text. */
   align?: styles.AlignVariants;
   /** Prevent text from overflowing. Defaults to true. */
@@ -23,7 +25,6 @@ type TextProps = {
   /** Typographic style of text. Defaults to 'bodyM'. */
   variant?: styles.StyleVariants;
   // core props
-  id?: string;
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -31,12 +32,12 @@ type TextProps = {
 export default function Text({
   as: Component = "p",
   id,
+  align,
   breakWord = true,
   italic,
   numeric,
   truncate,
   visuallyHidden,
-  align,
   color,
   fontWeight,
   variant = "bodyM",

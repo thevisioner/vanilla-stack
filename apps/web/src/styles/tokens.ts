@@ -6,27 +6,31 @@
 // Variants share a naming pattern: UI element / Color role / State
 // Apply on-surface colors to elements that appear on surfaces.
 
-  background: "#f6f6f7",
-  surface: "#ffffff",
 const color = {
-  surfaceSubdued: "#fafbfb",
-  onSurface: "#111213",
+  background: "#ffffff",
 
   text: "#0f172a",
   textSubdued: "#334155",
-  textOnDark: "#f6f6f7",
+  textLight: "#64748b",
 
-  border: "#8d9196",
-  divider: "#e1e3e5",
-  dividerDark: "#454749",
+  surface: "#f1f5f9",
+  surfaceAlt: "#e8edf3",
+  surfaceDark: "#0f172a",
+  textOnSurfaceDark: "#ffffff",
+  textSubduedOnSurfaceDark: "#94a3b8",
 
-  primary: "#008060",
+  border: "#ccd5e0",
+  divider: "#e3e8f0",
+  decorative: "#606F85",
+
+  primary: "#2563eb",
   textOnPrimary: "#ffffff",
-  secondary: "#cccccc",
-  textOnSecondary: "#202223",
-  interactive: "#2d72d2",
+
+  secondary: "#0f172a",
+  textOnSecondary: "#ffffff",
+
+  interactive: "#0f172a",
   textOnInteractive: "#ffffff",
-  decorative: "#c9cccf",
 } as const;
 
 // Material Design 2 Breakpoint system

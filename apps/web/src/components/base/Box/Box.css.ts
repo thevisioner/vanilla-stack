@@ -13,12 +13,6 @@ export const border = styleVariants({
       borderColor: vars.color.divider,
     },
   ],
-  dividerDark: [
-    base,
-    {
-      borderColor: vars.color.dividerDark,
-    },
-  ],
   transparent: [base, { borderColor: "transparent" }],
 });
 

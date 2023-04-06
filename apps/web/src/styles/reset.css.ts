@@ -30,3 +30,20 @@ globalStyle("html", {
 globalStyle(`button, input, optgroup, select, textarea`, {
   fontFamily: "inherit",
 });
+
+// Tailwind Preflight
+// https://tailwindcss.com/docs/preflight
+// https://unpkg.com/tailwindcss@3.3.0/src/css/preflight.css
+
+globalStyle("a", {
+  color: "inherit",
+  margin: "-0.5em",
+  padding: "0.5em",
+  textDecoration: "inherit",
+});
+
+globalStyle("ol, ul", {
+  listStyle: "none",
+  margin: 0,
+  padding: 0,
+});

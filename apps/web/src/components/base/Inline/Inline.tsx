@@ -3,16 +3,23 @@ import { Sprinkles, sprinkles } from "@/styles/sprinkles.css";
 import * as styles from "./Inline.css";
 
 type InlineProps = {
+  /** HTML Element type. Defaults to <div>. */
   as?: "div" | "ul" | "ol" | "fieldset";
+  /** Horizontal alignment of children. */
   align?:
     | "start"
-    | "end"
     | "center"
+    | "end"
     | "space-around"
     | "space-between"
     | "space-evenly";
+  /** Vertical alignment of children. */
   blockAlign?: "start" | "center" | "end" | "baseline" | "stretch";
-  gap?: Sprinkles["rowGap"];
+  /** The spacing between elements. Accepts a fluid spacing token. */
+  gap?: Sprinkles["columnGap"];
+  /** The vertical spacing between elements if wrap. Accepts a fluid spacing token. */
+  rowGap?: Sprinkles["rowGap"];
+  /** Wrap elements to multiple rows as needed. Defaults to true. */
   wrap?: boolean;
   // core props
   children?: React.ReactNode;
@@ -21,21 +28,23 @@ type InlineProps = {
 };
 
 export default function Inline({
-  as,
+  as = "div",
   align,
-  blockAlign,
+  blockAlign = "center",
   gap,
+  rowGap,
   wrap = true,
   children,
   className,
   style,
 }: InlineProps) {
-  const Component = as ?? "div";
+  const Component = as;
   const classNames = clsx(
     styles.base,
     align && styles.align[align],
     blockAlign && styles.blockAlign[blockAlign],
     gap && sprinkles({ columnGap: gap }),
+    rowGap && sprinkles({ rowGap }),
     !wrap && styles.nowrap,
     className
   );

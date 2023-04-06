@@ -1,42 +1,44 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { fluid } from "@/styles/fluid";
-import { color } from "@/styles/tokens";
-import { vars } from "@/styles/theme.css";
-
+import { darken } from "polished";
+import { fluid, tokens, vars } from "@/styles";
 import {
   stateLayerBase,
   stateLayerStyle,
   stateDisabledStyle,
-} from "@/styles/helpers.css";
+  transition,
+  border,
+} from "@/styles/utils.css";
 
 const reset = style({
   appearance: "none",
   WebkitAppearance: "none",
   MozAppearance: "none",
-  border: "none",
-  padding: 0,
-  margin: 0,
-  cursor: "pointer",
-  outline: "none",
   backgroundColor: "transparent",
+  border: "none",
+  cursor: "pointer",
+  margin: 0,
+  padding: 0,
+  // outline: "none",
 });
 
-// FIXME: Classnames is in reversed order
-
+// FIXME: Class names is in reverse order
 export const base = style([
   reset,
   {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: vars.shape.borderRadius.s,
+    fontFamily: vars.font.body,
+    fontSize: fluid.type("step-0"),
+    lineHeight: vars.type.lineHeight.label,
     paddingBlock: fluid.space("xs"),
     paddingInline: fluid.space("s"),
-    borderRadius: vars.shape.borderRadius.m,
-    fontFamily: vars.font.primary,
-    fontSize: fluid.type("step-0"),
-    fontWeight: vars.type.fontWeight.regular,
-    lineHeight: vars.type.lineHeight.label,
-    textDecoration: "none",
+    selectors: {
+      "&:focus": {
+        outlineOffset: vars.shape.borderWidth[2],
+      },
+    },
   },
   stateLayerBase(),
 ]);
@@ -45,16 +47,59 @@ export const plain = style([
   {
     backgroundColor: "transparent",
     color: vars.color.text,
+    marginBlock: `calc(${fluid.space("xs")} * -1)`,
+    marginInline: `calc(${fluid.space("s")} * -1)`,
+    // selectors: {
+    //   "&:hover": {
+    //     textDecoration: "underline",
+    //   },
+    // },
   },
-  stateLayerStyle(vars.color.text),
+  stateLayerStyle(),
 ]);
 
 export const primary = style([
   {
     backgroundColor: vars.color.primary,
+    borderRadius: vars.shape.borderRadius.full,
     color: vars.color.textOnPrimary,
+    fontWeight: vars.type.fontWeight.semibold,
+    selectors: {
+      "&:focus": {
+        outline: border(2, "solid", vars.color.primary),
+      },
+    },
   },
-  stateLayerStyle(vars.color.textOnPrimary),
+  stateLayerStyle(),
+]);
+
+export const secondary = style([
+  primary,
+  {
+    backgroundColor: vars.color.text,
+    color: vars.color.textOnPrimary,
+    selectors: {
+      "&:focus": {
+        outline: border(2, "solid", vars.color.text),
+      },
+    },
+  },
+]);
+
+export const outline = style([
+  {
+    backgroundColor: "transparent",
+    border: border(1, "solid", tokens.color.border),
+    borderRadius: vars.shape.borderRadius.full,
+    color: vars.color.text,
+    transition: transition("border-color", "short4", "emphasized"),
+    selectors: {
+      "&:hover": {
+        borderColor: darken(0.1, tokens.color.border),
+      },
+    },
+  },
+  stateLayerStyle(),
 ]);
 
 export const fullWidth = style({
@@ -93,7 +138,7 @@ export const disabled = style([
   {
     cursor: "not-allowed",
   },
-  stateDisabledStyle(primary, color.textOnPrimary, color.primary),
+  stateDisabledStyle(primary, tokens.color.textOnPrimary, tokens.color.primary),
 ]);
 
 export const loading = style({
@@ -101,15 +146,18 @@ export const loading = style({
   opacity: 0.75,
 });
 
-export const icon = style({
-  selectors: {
-    "&:not(:first-child)": {
-      marginLeft: fluid.space("xs"),
-    },
-    "&:not(:last-child)": {
-      marginRight: fluid.space("xs"),
-    },
-  },
+export const containsIcon = style({
+  columnGap: fluid.space("3xs"),
 });
 
-export { visuallyHidden } from "@/styles/helpers.css";
+export const icon = style({
+  fill: vars.color.primary,
+  width: "0.875em",
+  height: "0.875em",
+  ":first-child": {
+    transform: "translateX(-0.2em)",
+  },
+  ":last-child": {
+    transform: "translateX(0.2em)",
+  },
+});

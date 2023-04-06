@@ -1,10 +1,17 @@
 import { style, styleVariants } from "@vanilla-extract/css";
-import { vars } from "@/styles/theme.css";
-import { fluid } from "@/styles/fluid";
+import { fluid, vars } from "@/styles";
+import { FluidTypeStep } from "@/styles/fluid";
 
 export const base = style({
   marginBlock: 0,
   textAlign: "inherit",
+});
+
+export const align = styleVariants({
+  start: { textAlign: "start" },
+  end: { textAlign: "end" },
+  center: { textAlign: "center" },
+  justify: { textAlign: "justify" },
 });
 
 export const breakWord = style({
@@ -25,74 +32,66 @@ export const truncate = style({
   whiteSpace: "nowrap",
 });
 
-export { visuallyHidden } from "@/styles/helpers.css";
-
-export const align = styleVariants({
-  start: { textAlign: "start" },
-  end: { textAlign: "end" },
-  center: { textAlign: "center" },
-  justify: { textAlign: "justify" },
-});
+export { visuallyHidden } from "@/styles/utils.css";
 
 export type AlignVariants = keyof typeof align;
 
 export const color = styleVariants({
   subdued: { color: vars.color.textSubdued },
-  onDark: { color: vars.color.textOnDark },
+  onSurfaceDark: { color: vars.color.textOnSurfaceDark },
 });
 
 export type ColorVariants = keyof typeof color;
 
+// FIXME: Specificity issue with `styleVariant`
 export const fontWeight = styleVariants({
   light: { fontWeight: vars.type.fontWeight.light },
   regular: { fontWeight: vars.type.fontWeight.regular },
   medium: { fontWeight: vars.type.fontWeight.medium },
+  semibold: { fontWeight: vars.type.fontWeight.semibold },
   bold: { fontWeight: vars.type.fontWeight.bold },
 });
 
 export type FontWeightVariants = keyof typeof fontWeight;
 
-export const styleVariant = styleVariants({
-  headingXl: {
-    fontSize: fluid.type("step-5"),
-    fontWeight: vars.type.fontWeight.light,
-    lineHeight: vars.type.lineHeight.headline,
-  },
-  headingL: {
-    fontSize: fluid.type("step-4"),
-    fontWeight: vars.type.fontWeight.regular,
-    lineHeight: vars.type.lineHeight.headline,
-  },
-  headingM: {
-    fontSize: fluid.type("step-3"),
-    fontWeight: vars.type.fontWeight.medium,
-    lineHeight: vars.type.lineHeight.headline,
-  },
-  headingS: {
-    fontSize: fluid.type("step-2"),
-    fontWeight: vars.type.fontWeight.medium,
-    lineHeight: vars.type.lineHeight.headline,
-  },
-  bodyL: {
-    fontSize: fluid.type("step-1"),
-    fontWeight: vars.type.fontWeight.regular,
-    lineHeight: vars.type.lineHeight.base,
-  },
-  bodyM: {
-    fontSize: fluid.type("step-0"),
-    fontWeight: vars.type.fontWeight.regular,
-    lineHeight: vars.type.lineHeight.base,
-  },
-  bodyS: {
-    fontSize: fluid.type("step--1"),
-    fontWeight: vars.type.fontWeight.regular,
-    lineHeight: vars.type.lineHeight.tight,
-  },
-  bodyXs: {
-    fontSize: fluid.type("step--2"),
-    fontWeight: vars.type.fontWeight.regular,
-    lineHeight: vars.type.lineHeight.tight,
-  },
+const scale = {
+  heading2Xl: "step-6",
+  headingXl: "step-5",
+  headingL: "step-4",
+  headingM: "step-3",
+  headingS: "step-2",
+  bodyL: "step-1",
+  bodyM: "step-0",
+  bodyS: "step--1",
+  bodyXs: "step--2",
+};
+
+const headingBase = style({
+  fontFamily: vars.font.display,
+  fontWeight: vars.type.fontWeight.medium,
+  lineHeight: vars.type.lineHeight.headline,
+  letterSpacing: vars.type.letterSpacing.tight,
 });
+
+const bodyBase = style({
+  fontWeight: vars.type.fontWeight.regular,
+  lineHeight: vars.type.lineHeight.base,
+});
+
+export const styleVariant = styleVariants(scale, (step, key) =>
+  key.startsWith("heading")
+    ? [
+        headingBase,
+        {
+          fontSize: fluid.type(step as FluidTypeStep),
+        },
+      ]
+    : [
+        bodyBase,
+        {
+          fontSize: fluid.type(step as FluidTypeStep),
+        },
+      ]
+);
 
 export type StyleVariants = keyof typeof styleVariant;

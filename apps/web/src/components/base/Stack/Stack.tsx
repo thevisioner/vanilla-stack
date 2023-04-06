@@ -3,15 +3,15 @@ import { Sprinkles, sprinkles } from "@/styles/sprinkles.css";
 import * as styles from "./Stack.css";
 
 type StackProps = {
-  /** HTML Element type */
+  /** HTML Element type. Defaults to <div>. */
   as?: "div" | "ul" | "ol" | "fieldset";
-  /** Horizontal alignment of children */
+  /** Horizontal alignment of children. */
   align?: "start" | "end" | "center";
-  /** The spacing between children */
+  /** The spacing between elements. Accepts a fluid spacing token. */
   gap?: Sprinkles["rowGap"];
-  /** Reverse the render order of child items */
+  /** Reverse the render order of child items. */
   reverse?: boolean;
-  // hidden core props
+  // core props
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -23,7 +23,7 @@ type StackProps = {
 export default function Stack({
   as = "div",
   align,
-  gap = "s",
+  gap,
   reverse = false,
   children,
   className,

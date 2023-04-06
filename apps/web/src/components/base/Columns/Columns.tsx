@@ -2,18 +2,24 @@ import clsx from "clsx";
 import { sprinkles, Sprinkles } from "@/styles/sprinkles.css";
 import * as styles from "./Columns.css";
 
+// TODO: add auto-fill and auto-fit
+
 type ColumsProps = {
+  /** HTML Element type. Defaults to <div>. */
   as?: "div" | "ul" | "ol" | "fieldset";
+  /** Vertical alignment of children. If not set, inline elements will stretch to the height of the parent. */
   align?: "start" | "end" | "center";
+  /** The number of columns to display. Accepts either a single number or an array of fractions. */
   columns?: number | ("oneThird" | "oneHalf" | "twoThirds")[];
-  gap?: Sprinkles["rowGap"];
+  /** The spacing between elements. Accepts a fluid spacing token. */
+  gap?: Sprinkles["columnGap"];
   // core props
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
 };
 export default function Colums({
-  as,
+  as = "div",
   align,
   columns,
   gap,
@@ -21,12 +27,12 @@ export default function Colums({
   className,
   style,
 }: ColumsProps) {
-  const Component = as ?? "div";
+  const Component = as;
   const classNames = clsx(
     styles.base,
     align && styles.align[align],
     Array.isArray(columns) && styles.columns[columns[0]],
-    gap && sprinkles({ rowGap: gap }),
+    gap && sprinkles({ columnGap: gap }),
     className
   );
   const composedStyles = {

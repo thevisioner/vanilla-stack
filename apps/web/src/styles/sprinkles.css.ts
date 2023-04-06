@@ -25,12 +25,12 @@ const spacingProperties = defineProperties({
 
 export type BackgroundColorTokenAlias = Pick<
   typeof vars.color,
-  "background" | "surface" | "surfaceSubdued"
+  "background" | "surface" | "surfaceAlt" | "surfaceDark"
 >;
 
 export type ColorTokenAlias = Pick<
   typeof vars.color,
-  "text" | "textSubdued" | "textOnPrimary" | "textOnSecondary" | "onSurface"
+  "text" | "textSubdued" | "textOnPrimary" | "textOnSecondary"
 >;
 
 const colorProperties = defineProperties({
