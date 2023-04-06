@@ -19,10 +19,13 @@
     "clsx": "^1.2.1",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
+    "motion": "^10.15.5",
     "next": "13.2.4",
     "polished": "^4.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-wrap-balancer": "^0.4.0",
+    "sharp": "^0.32.0",
     "typescript": "5.0.2"
   },
   "devDependencies": {
