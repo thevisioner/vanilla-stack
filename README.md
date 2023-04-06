@@ -2,6 +2,9 @@
 
 This is a [Next.js](https://nextjs.org/) web starter template for personal use.
 
+Starter contains an example website template. The template is  
+rebuilt from scratch and based on the [Tailwind UI's template "Salient"](https://tailwindui.com/templates/salient).
+
 ## What's inside?
 
 This monorepo is managed by [Turborepo](https://turbo.build/repo) and [npm](https://www.npmjs.com/). It includes the following packages/apps:
