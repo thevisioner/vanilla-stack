@@ -1,38 +1,24 @@
 import localFont from "next/font/local";
 import clsx from "clsx";
 
-const dmSans = localFont({
+const inter = localFont({
   src: [
     {
-      path: "./DM_Sans/DMSans-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./DM_Sans/DMSans-Medium.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./DM_Sans/DMSans-Bold.ttf",
-      weight: "700",
-      style: "normal",
+      path: "./Inter/Inter-VariableFont_slnt,wght.ttf",
     },
   ],
   fallback: ["sans-serif"],
-  variable: "--font-dm-sans",
+  variable: "--font-inter",
 });
 
-const shrikhand = localFont({
+const lexend = localFont({
   src: [
     {
-      path: "./Shrikhand/Shrikhand-Regular.ttf",
-      weight: "400",
-      style: "normal",
+      path: "./Lexend/Lexend-VariableFont_wght.ttf",
     },
   ],
-  fallback: ["serif"],
-  variable: "--font-shrikhand",
+  fallback: ["sans-serif"],
+  variable: "--font-lexend",
 });
 
 export default function FontProvider({
@@ -41,7 +27,7 @@ export default function FontProvider({
   children: React.ReactNode;
 }) {
   return (
-    <div id="__app" className={clsx(dmSans.variable, shrikhand.variable)}>
+    <div id="__app" className={clsx(inter.variable, lexend.variable)}>
       {children}
     </div>
   );
