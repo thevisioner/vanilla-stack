@@ -1,7 +1,7 @@
-import Balancer from "react-wrap-balancer";
-import { Columns, Stack, Text } from "@/components/base";
+import { Columns, Stack } from "@/components/base";
 import { chunkArray } from "@/helpers";
 import ReviewCard from "./ReviewCard";
+import BaseSection from "../Base/BaseSection";
 import * as styles from "./SocialProof.css";
 
 const reviews = [
@@ -45,45 +45,32 @@ const reviews = [
 
 export type Review = (typeof reviews)[0];
 
-// TODO: Seperate section element into its own component
-// - add background, content color variation styles
-// - include section title and description
-
-export default function SocialProof() {
+export default function SocialProof({ id }: { id?: string }) {
   const reviewsChunks = chunkArray(reviews, 2);
   return (
-    <section className={styles.section}>
-      <div className={styles.content}>
-        <Text
-          as="h2"
-          align="center"
-          variant="headingL"
-          className={styles.sectionTitle}
-        >
-          <Balancer>Loved by businesses worldwide.</Balancer>
-        </Text>
-        <Text as="p" align="center" className={styles.sectionDescription}>
-          <Balancer>
-            Our software is so simple that people can’t help but fall in love
-            with it. Simplicity is easy when you just skip tons of
-            mission-critical features.
-          </Balancer>
-        </Text>
-
-        <Columns as="ul" columns={3} gap="m-l">
-          {reviewsChunks.map((chunk, index) => (
-            <li key={index}>
-              <Stack as="ul" gap="l-xl">
-                {chunk.map((review) => (
-                  <li key={review.name}>
-                    <ReviewCard review={review} />
-                  </li>
-                ))}
-              </Stack>
-            </li>
-          ))}
-        </Columns>
-      </div>
-    </section>
+    <BaseSection
+      id={id}
+      className={styles.section}
+      wrapContent
+      heading={`Loved by businesses worldwide.`}
+      text={`Our software is so simple that people can’t help but fall in love
+    with it. Simplicity is easy when you just skip tons of
+    mission-critical features.`}
+      textOptions={{ className: styles.sectionText }}
+    >
+      <Columns as="ul" columns={3} gap="m-l">
+        {reviewsChunks.map((chunk, index) => (
+          <li key={index}>
+            <Stack as="ul" gap="l-xl">
+              {chunk.map((review) => (
+                <li key={review.name}>
+                  <ReviewCard review={review} />
+                </li>
+              ))}
+            </Stack>
+          </li>
+        ))}
+      </Columns>
+    </BaseSection>
   );
 }

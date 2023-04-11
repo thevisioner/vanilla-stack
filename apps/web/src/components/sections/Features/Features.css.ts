@@ -1,45 +1,14 @@
 import { style } from "@vanilla-extract/css";
 import { rem } from "polished";
 import { fluid, vars } from "@/styles";
-import { subgridChild, subgridParent, transition } from "@/styles/utils.css";
+import { transition } from "@/styles/utils.css";
 
-export const section = style([
-  subgridParent,
-  {
-    backgroundColor: vars.color.primary,
-    marginBlockStart: fluid.space("l-xl"),
-    paddingBlockStart: `calc(${fluid.space("2xl-3xl")} * 1.25)`,
-    paddingBlockEnd: `calc(${fluid.space("2xl-3xl")} * 1.125)`,
-    overflow: "hidden",
-    position: "relative",
-  },
-]);
-
-export const sectionBackground = style({
-  userSelect: "none",
-  objectFit: "contain",
+export const section = style({
+  marginBlockStart: fluid.space("l-xl"),
+  overflow: "hidden",
 });
 
-export const content = style([
-  subgridChild,
-  {
-    color: vars.color.textOnPrimary,
-    position: "relative",
-  },
-]);
-
-export const sectionTitle = style({
-  fontWeight: vars.type.fontWeight.regular,
-  marginBlockEnd: fluid.space("s-m"),
-});
-
-export const sectionDescription = style({
-  marginBlockEnd: fluid.space("xl-2xl"),
-  letterSpacing: vars.type.letterSpacing.tight,
-  opacity: 0.875,
-});
-
-export const featuresContent = style({
+export const layout = style({
   display: "grid",
   gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
   alignItems: "center",

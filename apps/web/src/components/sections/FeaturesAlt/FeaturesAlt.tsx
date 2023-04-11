@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Balancer from "react-wrap-balancer";
-import { Button, Columns, Text } from "@/components/base";
 import clsx from "clsx";
+import { Button, Text } from "@/components/base";
+import BaseSection from "../Base/BaseSection";
 import * as styles from "./FeaturesAlt.css";
 import Icon from "./Icon";
 import Slider from "./Slider";
@@ -38,28 +39,19 @@ const features = [
 export type Feature = (typeof features)[number];
 export type FeatureName = Feature["name"];
 
-export default function FeaturesSlider() {
+export default function FeaturesAlt({ id }: { id?: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleFeatureClick = (index: number) => () => {
     setCurrentIndex(index);
   };
   return (
-    <section className={styles.section}>
-      <Text
-        as="h2"
-        align="center"
-        variant="headingL"
-        className={styles.sectionTitle}
-      >
-        <Balancer>Simplify everyday business tasks.</Balancer>
-      </Text>
-      <Text as="p" align="center" className={styles.sectionDescription}>
-        <Balancer>
-          Because you’d probably be a little confused if we suggested you
-          complicate your everyday business tasks instead.
-        </Balancer>
-      </Text>
-
+    <BaseSection
+      id={id}
+      heading={`Simplify everyday business tasks.`}
+      text={`Because you’d probably be a little confused if we suggested you
+    complicate your everyday business tasks instead.`}
+      textOptions={{ className: styles.sectionText }}
+    >
       <ul className={styles.featuresList}>
         {features.map((feature, index) => {
           const isActive = index === currentIndex;
@@ -88,8 +80,7 @@ export default function FeaturesSlider() {
           );
         })}
       </ul>
-
       <Slider features={features} index={currentIndex} />
-    </section>
+    </BaseSection>
   );
 }

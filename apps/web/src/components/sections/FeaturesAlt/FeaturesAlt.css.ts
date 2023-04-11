@@ -2,22 +2,9 @@ import { style } from "@vanilla-extract/css";
 import { fluid, vars } from "@/styles";
 import { screen, transition } from "@/styles/utils.css";
 
-export const section = style({
-  paddingBlockStart: `calc(${fluid.space("2xl-3xl")} * 1.25)`,
-  paddingBlockEnd: `calc(${fluid.space("2xl-3xl")} * 1.125)`,
-});
-
-export const sectionTitle = style({
-  fontWeight: vars.type.fontWeight.regular,
-  marginBlockEnd: fluid.space("s-m"),
-});
-
-export const sectionDescription = style({
-  marginBlockEnd: fluid.space("xl-2xl"),
-  letterSpacing: vars.type.letterSpacing.tight,
+export const sectionText = style({
   maxWidth: vars.type.lineLength.wide,
   marginInline: "auto",
-  opacity: 0.875,
 });
 
 export const featuresList = style({

@@ -1,8 +1,7 @@
-import Image from "next/image";
-import Balancer from "react-wrap-balancer";
 import { chunkArray } from "@/helpers";
 import { Columns, Stack, Text } from "@/components/base";
-import * as styles from "./Faq.css";
+import BaseSection from "../Base/BaseSection";
+import * as styles from "./Questions.css";
 
 const questions = [
   {
@@ -52,47 +51,39 @@ const questions = [
   },
 ];
 
-export default function Faq() {
+export default function Questions({ id }: { id?: string }) {
   // TODO: useMatchScreenSize hook
   const chunkedQuestions = chunkArray(questions, 3);
   return (
-    <section className={styles.section}>
-      <Image
-        fill
-        src="/assets/background-faqs.jpg"
-        alt=""
-        className={styles.sectionBackground}
-      />
-
-      <div className={styles.wrapper}>
-        <Text as="h2" variant="headingL" className={styles.sectionTitle}>
-          <Balancer>Frequently asked questions</Balancer>
-        </Text>
-        <Text as="p" className={styles.sectionDescription}>
-          <Balancer>
-            If you can’t find what you’re looking for, email our support team
-            and if you’re lucky someone will get back to you.
-          </Balancer>
-        </Text>
-        <Columns as="ul" columns={3} gap="l-xl" className={styles.columns}>
-          {chunkedQuestions.map((questions, index) => (
-            <li key={index}>
-              <Stack as="ul" gap="m-l" className={styles.column}>
-                {questions.map(({ question, answer }) => (
-                  <li key={question}>
-                    <Text as="h3" variant="bodyM" className={styles.question}>
-                      {question}
-                    </Text>
-                    <Text as="p" variant="bodyS">
-                      {answer}
-                    </Text>
-                  </li>
-                ))}
-              </Stack>
-            </li>
-          ))}
-        </Columns>
-      </div>
-    </section>
+    <BaseSection
+      id={id}
+      className={styles.section}
+      backgroundImage="/assets/background-faqs.jpg"
+      backgroundOptions={{ className: styles.sectionBackground }}
+      wrapContent
+      heading={`Frequently asked questions`}
+      text={`If you can’t find what you’re looking for, email our support team
+    and if you’re lucky someone will get back to you.`}
+      textOptions={{ className: styles.sectionText }}
+    >
+      <Columns as="ul" columns={3} gap="l-xl">
+        {chunkedQuestions.map((questions, index) => (
+          <li key={index}>
+            <Stack as="ul" gap="m-l">
+              {questions.map(({ question, answer }) => (
+                <li key={question}>
+                  <Text as="h3" variant="bodyM" className={styles.question}>
+                    {question}
+                  </Text>
+                  <Text as="p" variant="bodyS">
+                    {answer}
+                  </Text>
+                </li>
+              ))}
+            </Stack>
+          </li>
+        ))}
+      </Columns>
+    </BaseSection>
   );
 }

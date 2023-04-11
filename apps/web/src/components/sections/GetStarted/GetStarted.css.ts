@@ -2,17 +2,20 @@ import { style } from "@vanilla-extract/css";
 import { fluid, vars } from "@/styles";
 
 export const section = style({
-  backgroundColor: vars.color.surface,
   paddingBlock: fluid.space("2xl-3xl"),
+  textAlign: "center",
 });
 
 export const sectionText = style({
+  marginBlockEnd: fluid.space("m-l"),
   maxWidth: vars.type.lineLength.wide,
   marginInline: "auto",
 });
 
-export const columns = style({
-  display: "grid",
-  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-  gridGap: fluid.space("l-xl"),
+export const cta = style({
+  backgroundColor: vars.color.textOnPrimary,
+  color: vars.color.textSubdued,
+  ":focus": {
+    outlineColor: vars.color.textOnPrimary,
+  },
 });

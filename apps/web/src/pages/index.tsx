@@ -3,9 +3,9 @@ import {
   Companies,
   Features,
   FeaturesAlt,
-  Cta,
+  GetStarted,
   SocialProof,
-  Faq,
+  Questions,
 } from "@/components/sections";
 
 export default function Home() {
@@ -16,11 +16,11 @@ export default function Home() {
 
       <HomeMain />
       <Companies />
-      <Features />
+      <Features id="features" />
       <FeaturesAlt />
-      <Cta />
-      <SocialProof />
-      <Faq />
+      <GetStarted />
+      <SocialProof id="testimonials" />
+      <Questions />
     </>
   );
 }

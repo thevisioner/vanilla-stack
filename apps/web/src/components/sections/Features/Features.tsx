@@ -1,10 +1,12 @@
 import { useState } from "react";
-import Balancer from "react-wrap-balancer";
 import Image from "next/image";
 import { Button, Stack, Text } from "@/components/base";
+import BaseSection from "../Base/BaseSection";
 import * as styles from "./Features.css";
 
 // TODO: Prefetch images when hovering over feature buttons
+// https://web.dev/learn/design/responsive-images/#preloading-hints
+// <link rel="preload" href="hero.jpg" as="image" fetchpriority="high">
 
 const features = [
   {
@@ -33,72 +35,58 @@ const features = [
   },
 ];
 
-export default function Features() {
+export default function Features({ id }: { id?: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const handleFeatureClick = (index: number) => () => {
     setCurrentIndex(index);
   };
   const currentFeature = features[currentIndex];
   return (
-    <section className={styles.section}>
-      <Image
-        fill
-        src="/assets/background-features.jpg"
-        alt=""
-        className={styles.sectionBackground}
-      />
-
-      <div className={styles.content}>
-        <Text
-          as="h2"
-          align="center"
-          variant="headingL"
-          className={styles.sectionTitle}
-        >
-          <Balancer>Everything you need to run your books.</Balancer>
-        </Text>
-        <Text as="p" align="center" className={styles.sectionDescription}>
-          <Balancer>
-            Well everything you need if you aren’t that picky about minor
-            details like tax compliance.
-          </Balancer>
-        </Text>
-        {/* TODO: ARIA: tab role (https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tab_role) */}
-        <div className={styles.featuresContent}>
-          <Stack as="ul" className={styles.featuresList}>
-            {features.map((feature, index) => (
-              <li key={feature.title} className={styles.featureItem}>
-                <Text as="h3" className={styles.featureTitle}>
-                  <Button
-                    plain
-                    onClick={handleFeatureClick(index)}
-                    className={styles.featureTitleButton}
-                    ariaSelected={index === currentIndex}
-                    ariaRole="tab"
-                  >
-                    {feature.title}
-                  </Button>
-                </Text>
-                <Text as="p" variant="bodyS">
-                  {feature.description}
-                </Text>
-              </li>
-            ))}
-          </Stack>
-          <div className={styles.featureImage}>
-            {/* TODO: Add framer-motion ?? */}
-            <div className={styles.featureImageInner}>
-              <Image
-                fill
-                quality={90}
-                src={currentFeature.image}
-                alt={currentFeature.title}
-                priority={currentIndex === 0 ? true : undefined}
-              />
-            </div>
+    <BaseSection
+      id={id}
+      className={styles.section}
+      wrapContent
+      primary
+      backgroundImage="/assets/background-features.jpg"
+      heading={`Everything you need to run your books.`}
+      text={`Well everything you need if you aren’t that picky about minor
+    details like tax compliance.`}
+    >
+      {/* TODO: ARIA: tab role (https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tab_role) */}
+      <div className={styles.layout}>
+        <Stack as="ul" className={styles.featuresList}>
+          {features.map((feature, index) => (
+            <li key={feature.title} className={styles.featureItem}>
+              <Text as="h3" className={styles.featureTitle}>
+                <Button
+                  plain
+                  onClick={handleFeatureClick(index)}
+                  className={styles.featureTitleButton}
+                  ariaSelected={index === currentIndex}
+                  ariaRole="tab"
+                >
+                  {feature.title}
+                </Button>
+              </Text>
+              <Text as="p" variant="bodyS">
+                {feature.description}
+              </Text>
+            </li>
+          ))}
+        </Stack>
+        <div className={styles.featureImage}>
+          {/* TODO: Add framer-motion ?? */}
+          <div className={styles.featureImageInner}>
+            <Image
+              fill
+              quality={90}
+              src={currentFeature.image}
+              alt={currentFeature.title}
+              priority={currentIndex === 0 ? true : undefined}
+            />
           </div>
         </div>
       </div>
-    </section>
+    </BaseSection>
   );
 }
