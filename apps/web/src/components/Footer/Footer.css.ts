@@ -5,7 +5,7 @@ import { subgridChild, subgridParent, screen } from "@/styles/utils.css";
 export const footer = style([
   subgridParent,
   {
-    backgroundColor: vars.color.surface,
+    backgroundColor: "#f8fafc",
     paddingBlockStart: fluid.space("l-xl"),
   },
 ]);

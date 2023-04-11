@@ -2,7 +2,7 @@ import { Columns, Stack } from "@/components/base";
 import { chunkArray } from "@/helpers";
 import ReviewCard from "./ReviewCard";
 import BaseSection from "../Base/BaseSection";
-import * as styles from "./SocialProof.css";
+import * as styles from "./Testimonials.css";
 
 const reviews = [
   {

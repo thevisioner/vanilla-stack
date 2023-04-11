@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Balancer from "react-wrap-balancer";
 import { Divider, Inline, Stack, Text } from "@/components/base";
-import { Review } from "./SocialProof";
+import { Review } from "./Testimonials";
 import * as styles from "./ReviewCard.css";
 
 export default function ReviewCard({ review }: { review: Review }) {

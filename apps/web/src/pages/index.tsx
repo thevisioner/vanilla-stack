@@ -4,7 +4,8 @@ import {
   Features,
   FeaturesAlt,
   GetStarted,
-  SocialProof,
+  Testimonials,
+  Pricing,
   Questions,
 } from "@/components/sections";
 
@@ -19,7 +20,8 @@ export default function Home() {
       <Features id="features" />
       <FeaturesAlt />
       <GetStarted />
-      <SocialProof id="testimonials" />
+      <Testimonials id="testimonials" />
+      <Pricing id="pricing" />
       <Questions />
     </>
   );
