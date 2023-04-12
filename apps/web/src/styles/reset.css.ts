@@ -16,6 +16,14 @@ globalStyle("html", {
   WebkitFontSmoothing: "antialiased",
   MozOsxFontSmoothing: "grayscale",
 
+  /* Smooth scroll behavior */
+  scrollBehavior: "smooth",
+  "@media": {
+    "(prefers-reduced-motion: reduce)": {
+      scrollBehavior: "auto",
+    },
+  },
+
   /* Deactivate auto-enlargement of small text in Safari */
   textSizeAdjust: "100%",
 

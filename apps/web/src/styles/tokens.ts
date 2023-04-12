@@ -91,6 +91,8 @@ const depth = {
 
 const shadowColorValues = "31, 33, 36";
 
+// TODO: Lighter shadows
+
 const shadow = {
   inset: {
     l: `inset 0rem 0rem 0.4375rem 0.125rem rgba(${shadowColorValues}, 0.18)`,

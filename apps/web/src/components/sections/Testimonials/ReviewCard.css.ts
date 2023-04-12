@@ -1,12 +1,19 @@
 import { style } from "@vanilla-extract/css";
+import { rem } from "polished";
 import { fluid, vars } from "@/styles";
+import { screen } from "@/styles/utils.css";
 
 export const card = style({
   backgroundColor: vars.color.background,
   borderRadius: vars.shape.borderRadius.l,
-  boxShadow: vars.shadow.xl,
+  boxShadow: vars.shadow.l,
+  maxWidth: rem(600),
   margin: 0,
+  marginInline: "auto",
   padding: fluid.space("s-m"),
+  "@media": screen("m", {
+    boxShadow: vars.shadow.xl,
+  }),
 });
 
 export const blockquote = style({

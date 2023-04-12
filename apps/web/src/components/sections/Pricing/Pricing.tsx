@@ -99,9 +99,9 @@ export default function Pricing({ id }: { id?: string }) {
           <Balancer>
             <em className={styles.emphasize}>
               <Scribble className={styles.scribble} />
-              <span className={styles.emphasizeText}>Simple pricing</span>
-            </em>
-            , for everyone.
+              <span className={styles.emphasizeText}>Simple pricing</span>,
+            </em>{" "}
+            for everyone.
           </Balancer>
         </Text>
         <Text as="p" align="center" className={styles.text}>

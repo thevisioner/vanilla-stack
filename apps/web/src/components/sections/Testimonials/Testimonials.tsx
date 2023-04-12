@@ -1,8 +1,9 @@
 import { Columns, Stack } from "@/components/base";
-import { chunkArray } from "@/helpers";
+import { splitArray } from "@/helpers";
 import ReviewCard from "./ReviewCard";
 import BaseSection from "../Base/BaseSection";
 import * as styles from "./Testimonials.css";
+import useMatchScreenSize from "@/hooks/match-screen-size";
 
 const reviews = [
   {
@@ -46,7 +47,10 @@ const reviews = [
 export type Review = (typeof reviews)[0];
 
 export default function SocialProof({ id }: { id?: string }) {
-  const reviewsChunks = chunkArray(reviews, 2);
+  const matchMediumScreen = useMatchScreenSize("m");
+  const matchLargeScreen = useMatchScreenSize("l");
+  const numColumns = matchLargeScreen ? 3 : 2;
+  const reviewParts = splitArray(reviews, numColumns);
   return (
     <BaseSection
       id={id}
@@ -58,19 +62,29 @@ export default function SocialProof({ id }: { id?: string }) {
     mission-critical features.`}
       textOptions={{ className: styles.sectionText }}
     >
-      <Columns as="ul" columns={3} gap="m-l">
-        {reviewsChunks.map((chunk, index) => (
-          <li key={index}>
-            <Stack as="ul" gap="l-xl">
-              {chunk.map((review) => (
-                <li key={review.name}>
-                  <ReviewCard review={review} />
-                </li>
-              ))}
-            </Stack>
-          </li>
-        ))}
-      </Columns>
+      {matchMediumScreen ? (
+        <Columns as="ul" columns={numColumns} gap="m-l">
+          {reviewParts.map((chunk, index) => (
+            <li key={index}>
+              <Stack as="ul" gap="l-xl">
+                {chunk.map((review, index) => (
+                  <li key={`${review.name}.${index}`}>
+                    <ReviewCard review={review} />
+                  </li>
+                ))}
+              </Stack>
+            </li>
+          ))}
+        </Columns>
+      ) : (
+        <Stack as="ul" gap="l-xl" className={styles.reviewsList}>
+          {reviews.map((review, index) => (
+            <li key={`${review.name}.${index}`}>
+              <ReviewCard review={review} />
+            </li>
+          ))}
+        </Stack>
+      )}
     </BaseSection>
   );
 }

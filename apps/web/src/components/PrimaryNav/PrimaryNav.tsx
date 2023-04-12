@@ -5,15 +5,15 @@ import * as styles from "./PrimaryNav.css";
 
 const navigationItems = [
   {
-    href: "/features",
+    href: "#features",
     label: "Features",
   },
   {
-    href: "/testimonials",
+    href: "#testimonials",
     label: "Testimonials",
   },
   {
-    href: "/pricing",
+    href: "#pricing",
     label: "Pricing",
   },
 ];

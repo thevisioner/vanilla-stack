@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { subgridChild, subgridParent } from "@/styles/utils.css";
+import { screen, subgridChild, subgridParent } from "@/styles/utils.css";
 import { fluid, vars } from "@/styles";
 
 export const section = style([
@@ -49,6 +49,9 @@ export const scribble = style({
 
 export const cardsList = style({
   display: "grid",
-  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+  justifyContent: "center",
   gridGap: fluid.space("l-xl"),
+  "@media": screen("l", {
+    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+  }),
 });

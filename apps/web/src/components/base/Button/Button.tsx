@@ -3,7 +3,7 @@ import * as styles from "./Button.css";
 
 type ButtonProps = {
   /** The content to display inside the button. */
-  children: string | string[];
+  children?: string | string[];
   /** Disables the button but not the interaction. */
   disabled?: boolean;
   /** Displays a loading spinner. */
@@ -45,6 +45,8 @@ type ButtonProps = {
 
   /** The aria-label attribute. */
   ariaLabel?: string;
+  /** The aria-expanded attribute. */
+  ariaExpanded?: boolean;
   /** The aria-selected attribute. */
   ariaSelected?: boolean;
   /** The aria-role attribute. */
@@ -76,6 +78,7 @@ export default function Button({
   onFocus,
   onBlur,
   ariaLabel,
+  ariaExpanded,
   ariaSelected,
   ariaRole,
   // core props
@@ -85,6 +88,7 @@ export default function Button({
   const isDisabled = disabled || loading;
   const buttonProps = {
     "aria-label": ariaLabel,
+    "aria-expanded": ariaExpanded,
     "aria-selected": ariaSelected,
     role: ariaRole,
     disabled: isDisabled,
@@ -102,6 +106,7 @@ export default function Button({
   };
   const containsIcon = iconBefore || iconAfter;
   const iconOnly = !children && containsIcon;
+  const iconClassNames = clsx(styles.icon, !iconOnly && styles.alignIcon);
   const iconProps = iconOnly
     ? {
         "aria-hidden": true,
@@ -128,13 +133,13 @@ export default function Button({
   return (
     <Component className={classNames} style={style} {...props}>
       {iconBefore && (
-        <span className={styles.icon} {...iconProps}>
+        <span className={iconClassNames} {...iconProps}>
           {iconBefore}
         </span>
       )}
       {children && <span>{children}</span>}
       {iconAfter && (
-        <span className={styles.icon} {...iconProps}>
+        <span className={iconClassNames} {...iconProps}>
           {iconAfter}
         </span>
       )}

@@ -31,7 +31,7 @@ export const layoutRoot = style({
   gridTemplateColumns: `
     [full-start] minmax(0, 1fr)
     [edge-start] ${vars.fluid.edgeWidth}
-    [content-start] minmax(auto, ${rem(layout.contentWidth)}) [content-end]
+    [content-start] minmax(0, ${rem(layout.contentWidth)}) [content-end]
     ${vars.fluid.edgeWidth} [edge-end]
     minmax(0, 1fr) [full-end]
     `,

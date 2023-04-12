@@ -1,15 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { scroll } from "motion";
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import { Inline, Button } from "@/components/base";
 import PrimaryNav from "@/components/PrimaryNav/PrimaryNav";
 import { link as linkStyle } from "@/components/PrimaryNav/PrimaryNav.css";
+import useMatchScreenSize from "@/hooks/match-screen-size";
+import MenuButton from "./MenuButton";
 import * as styles from "./Header.css";
 
 const scrollThreshold = 100;
-
-// TODO: Mobile menu
 
 export default function Header() {
   const headerRef = useRef<HTMLDivElement>(null);
@@ -22,6 +22,12 @@ export default function Header() {
     }
   }, []);
 
+  // FIXME: SSR issue with useMatchScreenSize (Next.js middleware + cookie)
+  const matchMediumScreen = useMatchScreenSize("m");
+
+  const [mobileNavExpanded, setMobileNavExpanded] = useState(false);
+  const toggleMobileNav = () => setMobileNavExpanded((expanded) => !expanded);
+
   return (
     <header ref={headerRef} className={styles.header}>
       <Inline align="space-between">
@@ -30,18 +36,28 @@ export default function Header() {
             <Logo />
           </Link>
 
-          <PrimaryNav />
+          {matchMediumScreen && <PrimaryNav />}
         </Inline>
 
         <Inline gap="m-l">
-          <Link href="/signin" className={linkStyle}>
-            Sign in
-          </Link>
+          {matchMediumScreen && (
+            <Link href="/signin" className={linkStyle}>
+              Sign in
+            </Link>
+          )}
           <Button primary url="/register">
-            Get started today
+            Get started{matchMediumScreen ? " today" : ""}
           </Button>
+          {!matchMediumScreen && (
+            <MenuButton
+              expanded={mobileNavExpanded}
+              onToggle={toggleMobileNav}
+            />
+          )}
         </Inline>
       </Inline>
+
+      {/* TODO: Mobile menu */}
     </header>
   );
 }

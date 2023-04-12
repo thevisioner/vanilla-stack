@@ -24,6 +24,9 @@ type BaseSectionProps = {
     balance?: boolean;
     className?: string;
   };
+  wrapperOptions?: {
+    className?: string;
+  };
   children: React.ReactNode;
 };
 
@@ -39,6 +42,7 @@ export default function BaseSection({
   headingOptions,
   text,
   textOptions,
+  wrapperOptions,
   children,
 }: BaseSectionProps) {
   const sectionClassNames = clsx(
@@ -67,7 +71,8 @@ export default function BaseSection({
   const wrapperClassNames = clsx(
     styles.wrapper,
     // TODO: Style section elements based on common vars
-    primary && wrapContent && styles.textOnPrimary
+    primary && wrapContent && styles.textOnPrimary,
+    wrapperOptions?.className
   );
   return (
     <section id={id} className={sectionClassNames}>

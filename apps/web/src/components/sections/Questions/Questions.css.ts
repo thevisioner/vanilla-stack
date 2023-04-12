@@ -17,6 +17,11 @@ export const sectionText = style({
   marginInline: "auto",
 });
 
+export const questionsStack = style({
+  maxWidth: vars.type.lineLength.wide,
+  marginInline: "auto",
+});
+
 export const question = style({
   fontFamily: vars.font.display,
   marginBlockEnd: fluid.space("3xs-2xs"),

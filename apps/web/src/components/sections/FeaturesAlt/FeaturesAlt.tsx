@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Balancer from "react-wrap-balancer";
+import Image from "next/image";
 import clsx from "clsx";
-import { Button, Text } from "@/components/base";
+import { Bleed, Button, Columns, Stack, Text } from "@/components/base";
+import useMatchScreenSize from "@/hooks/match-screen-size";
 import BaseSection from "../Base/BaseSection";
-import * as styles from "./FeaturesAlt.css";
 import Icon from "./Icon";
 import Slider from "./Slider";
+import * as styles from "./FeaturesAlt.css";
 
 const features = [
   {
@@ -40,10 +42,16 @@ export type Feature = (typeof features)[number];
 export type FeatureName = Feature["name"];
 
 export default function FeaturesAlt({ id }: { id?: string }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const handleFeatureClick = (index: number) => () => {
-    setCurrentIndex(index);
-  };
+  const matchMediumScreen = useMatchScreenSize("m");
+  const featuresList = useMemo(
+    () =>
+      matchMediumScreen ? (
+        <MediumScreenFeaturesAlt />
+      ) : (
+        <SmallScreenFeaturesAlt />
+      ),
+    [matchMediumScreen]
+  );
   return (
     <BaseSection
       id={id}
@@ -52,7 +60,56 @@ export default function FeaturesAlt({ id }: { id?: string }) {
     complicate your everyday business tasks instead.`}
       textOptions={{ className: styles.sectionText }}
     >
-      <ul className={styles.featuresList}>
+      {featuresList}
+    </BaseSection>
+  );
+}
+
+function SmallScreenFeaturesAlt() {
+  return (
+    <Stack gap="xl-2xl">
+      {features.map((feature) => {
+        const itemClassNames = clsx(
+          styles.featureItem,
+          styles.featureItemActive
+        );
+        return (
+          <div key={feature.name} className={itemClassNames}>
+            <Icon featureName={feature.name} />
+            <Text as="p" className={styles.featureName}>
+              {feature.name}
+            </Text>
+            <Text as="h3" className={styles.featureTitle}>
+              <Balancer>{feature.title}</Balancer>
+            </Text>
+            <Text as="p" variant="bodyS">
+              <Balancer>{feature.description}</Balancer>
+            </Text>
+            <Bleed
+              className={styles.featureSmallImageBleed}
+              style={{ marginInline: `calc(var(--fluid-edge-width) * -1)` }}
+            >
+              <div className={styles.featureSmallImageWrapper}>
+                <div className={styles.featureSmallImage}>
+                  <Image src={feature.image} alt={feature.name} fill />
+                </div>
+              </div>
+            </Bleed>
+          </div>
+        );
+      })}
+    </Stack>
+  );
+}
+
+function MediumScreenFeaturesAlt() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const handleFeatureClick = (index: number) => () => {
+    setCurrentIndex(index);
+  };
+  return (
+    <>
+      <Columns as="ul" columns={3} gap="m-l" className={styles.featuresList}>
         {features.map((feature, index) => {
           const isActive = index === currentIndex;
           const itemClassNames = clsx(styles.featureItem, {
@@ -79,8 +136,8 @@ export default function FeaturesAlt({ id }: { id?: string }) {
             </li>
           );
         })}
-      </ul>
+      </Columns>
       <Slider features={features} index={currentIndex} />
-    </BaseSection>
+    </>
   );
 }

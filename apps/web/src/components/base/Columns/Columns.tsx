@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { rem } from "polished";
 import { sprinkles, Sprinkles } from "@/styles/sprinkles.css";
 import * as styles from "./Columns.css";
 
@@ -13,6 +14,8 @@ type ColumsProps = {
   columns?: number | ("oneThird" | "oneHalf" | "twoThirds")[];
   /** The spacing between elements. Accepts a fluid spacing token. */
   gap?: Sprinkles["columnGap"];
+  minWidth?: number;
+  autoFit?: boolean;
   // core props
   children?: React.ReactNode;
   className?: string;
@@ -23,6 +26,8 @@ export default function Colums({
   align,
   columns,
   gap,
+  minWidth,
+  autoFit,
   children,
   className,
   style,
@@ -38,7 +43,9 @@ export default function Colums({
   const composedStyles = {
     gridTemplateColumns:
       typeof columns === "number"
-        ? `repeat(${columns}, minmax(0, 1fr))`
+        ? `repeat(${
+            minWidth ? (autoFit ? "auto-fit" : "auto-fill") : columns
+          }, minmax(${minWidth ? rem(minWidth) : 0}, 1fr))`
         : undefined,
     ...style,
   };

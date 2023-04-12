@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
-import { Button, Stack, Text } from "@/components/base";
+import Balancer from "react-wrap-balancer";
+import { Button, Text } from "@/components/base";
 import BaseSection from "../Base/BaseSection";
 import * as styles from "./Features.css";
 
@@ -41,6 +42,7 @@ export default function Features({ id }: { id?: string }) {
     setCurrentIndex(index);
   };
   const currentFeature = features[currentIndex];
+
   return (
     <BaseSection
       id={id}
@@ -54,7 +56,7 @@ export default function Features({ id }: { id?: string }) {
     >
       {/* TODO: ARIA: tab role (https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/tab_role) */}
       <div className={styles.layout}>
-        <Stack as="ul" className={styles.featuresList}>
+        <ul className={styles.featuresList}>
           {features.map((feature, index) => (
             <li key={feature.title} className={styles.featureItem}>
               <Text as="h3" className={styles.featureTitle}>
@@ -68,12 +70,26 @@ export default function Features({ id }: { id?: string }) {
                   {feature.title}
                 </Button>
               </Text>
-              <Text as="p" variant="bodyS">
+              <Text
+                as="p"
+                variant="bodyS"
+                className={styles.featureDescription}
+              >
                 {feature.description}
               </Text>
             </li>
           ))}
-        </Stack>
+        </ul>
+
+        <Text
+          as="p"
+          align="center"
+          variant="bodyM"
+          className={styles.featureSeparateDescription}
+        >
+          <Balancer>{currentFeature.description}</Balancer>
+        </Text>
+
         <div className={styles.featureImage}>
           {/* TODO: Add framer-motion ?? */}
           <div className={styles.featureImageInner}>

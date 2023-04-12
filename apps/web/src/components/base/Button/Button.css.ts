@@ -154,6 +154,9 @@ export const icon = style({
   fill: vars.color.primary,
   width: "0.875em",
   height: "0.875em",
+});
+
+export const alignIcon = style({
   ":first-child": {
     transform: "translateX(-0.2em)",
   },

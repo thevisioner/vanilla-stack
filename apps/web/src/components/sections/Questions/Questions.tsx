@@ -1,5 +1,7 @@
+import { useCallback } from "react";
 import { chunkArray } from "@/helpers";
 import { Columns, Stack, Text } from "@/components/base";
+import useMatchScreenSize from "@/hooks/match-screen-size";
 import BaseSection from "../Base/BaseSection";
 import * as styles from "./Questions.css";
 
@@ -52,8 +54,25 @@ const questions = [
 ];
 
 export default function Questions({ id }: { id?: string }) {
-  // TODO: useMatchScreenSize hook
+  const matchMediumScreen = useMatchScreenSize("m");
   const chunkedQuestions = chunkArray(questions, 3);
+  const questionsStack = useCallback(
+    (items: typeof questions) => (
+      <Stack as="ul" gap="m-l" className={styles.questionsStack}>
+        {items.map(({ question, answer }) => (
+          <li key={question}>
+            <Text as="h3" variant="bodyM" className={styles.question}>
+              {question}
+            </Text>
+            <Text as="p" variant="bodyS">
+              {answer}
+            </Text>
+          </li>
+        ))}
+      </Stack>
+    ),
+    []
+  );
   return (
     <BaseSection
       id={id}
@@ -66,24 +85,15 @@ export default function Questions({ id }: { id?: string }) {
     and if you’re lucky someone will get back to you.`}
       textOptions={{ className: styles.sectionText }}
     >
-      <Columns as="ul" columns={3} gap="l-xl">
-        {chunkedQuestions.map((questions, index) => (
-          <li key={index}>
-            <Stack as="ul" gap="m-l">
-              {questions.map(({ question, answer }) => (
-                <li key={question}>
-                  <Text as="h3" variant="bodyM" className={styles.question}>
-                    {question}
-                  </Text>
-                  <Text as="p" variant="bodyS">
-                    {answer}
-                  </Text>
-                </li>
-              ))}
-            </Stack>
-          </li>
-        ))}
-      </Columns>
+      {matchMediumScreen ? (
+        <Columns as="ul" columns={3} gap="l-xl">
+          {chunkedQuestions.map((questionsChunk, index) => (
+            <li key={index}>{questionsStack(questionsChunk)}</li>
+          ))}
+        </Columns>
+      ) : (
+        questionsStack(questions)
+      )}
     </BaseSection>
   );
 }
