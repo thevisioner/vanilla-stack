@@ -39,7 +39,7 @@ export default function PricingCard({ plan }: { plan: Plan }) {
         <Stack as="ul" gap="2xs-xs" className={styles.featuresList}>
           {plan.features.map((feature) => (
             <li key={feature.name} className={styles.featureItem}>
-              <Inline gap="2xs-xs">
+              <Inline gap="2xs-xs" wrap={false}>
                 <FeatureIcon className={styles.featureItemIcon} />
                 <Text as="p" variant="bodyS">
                   {feature.name}

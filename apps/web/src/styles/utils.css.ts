@@ -106,8 +106,10 @@ export const border = (
 
 type ScreenKey = keyof typeof tokens.screen;
 
-export const screen = (screen: ScreenKey, style: StyleRule) => ({
-  [`screen and (min-width: ${em(tokens.screen[screen] + "px")})`]: {
+export const screen = (screen: ScreenKey | number, style: StyleRule) => ({
+  [`screen and (min-width: ${em(
+    typeof screen === "number" ? screen : tokens.screen[screen] + "px"
+  )})`]: {
     ...style,
   },
 });

@@ -154,6 +154,7 @@ export const icon = style({
   fill: vars.color.primary,
   width: "0.875em",
   height: "0.875em",
+  pointerEvents: "none",
 });
 
 export const alignIcon = style({

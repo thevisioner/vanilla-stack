@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import { scroll } from "motion";
 import Link from "next/link";
 import Logo from "@/components/Logo";
@@ -7,6 +8,7 @@ import PrimaryNav from "@/components/PrimaryNav/PrimaryNav";
 import { link as linkStyle } from "@/components/PrimaryNav/PrimaryNav.css";
 import useMatchScreenSize from "@/hooks/match-screen-size";
 import MenuButton from "./MenuButton";
+import MobileNav from "./MobileNav";
 import * as styles from "./Header.css";
 
 const scrollThreshold = 100;
@@ -23,10 +25,11 @@ export default function Header() {
   }, []);
 
   // FIXME: SSR issue with useMatchScreenSize (Next.js middleware + cookie)
-  const matchMediumScreen = useMatchScreenSize("m");
+  const matchMediumScreen = useMatchScreenSize(800);
 
   const [mobileNavExpanded, setMobileNavExpanded] = useState(false);
   const toggleMobileNav = () => setMobileNavExpanded((expanded) => !expanded);
+  const onMobileNavClose = () => setMobileNavExpanded(false);
 
   return (
     <header ref={headerRef} className={styles.header}>
@@ -57,7 +60,9 @@ export default function Header() {
         </Inline>
       </Inline>
 
-      {/* TODO: Mobile menu */}
+      <AnimatePresence>
+        {mobileNavExpanded && <MobileNav onClose={onMobileNavClose} />}
+      </AnimatePresence>
     </header>
   );
 }

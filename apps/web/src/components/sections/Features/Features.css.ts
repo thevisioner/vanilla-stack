@@ -3,6 +3,8 @@ import { rem, transparentize } from "polished";
 import { fluid, tokens, vars } from "@/styles";
 import { screen, transition } from "@/styles/utils.css";
 
+const smallScreen = 700;
+
 export const section = style({
   marginBlockStart: fluid.space("l-xl"),
   overflow: "hidden",
@@ -15,18 +17,28 @@ export const layout = style({
   "::before": {
     content: "",
     position: "absolute",
-    inset: 0,
+    top: 0,
+    bottom: "50%",
+    left: `calc(var(--fluid-edge-width) * -1)`,
+    right: `calc(var(--fluid-edge-width) * -1)`,
     backgroundColor: transparentize(0.95, tokens.color.textOnPrimary),
-    borderRadius: vars.shape.borderRadius.xl,
     boxShadow: "rgba(255, 255, 255, 0.18) 0px 0px 0px 1px inset",
   },
-  "@media": screen("m", {
-    gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
-    alignItems: "center",
-    "::before": {
-      display: "none",
-    },
-  }),
+  "@media": {
+    ...screen(smallScreen, {
+      "::before": {
+        inset: 0,
+        borderRadius: vars.shape.borderRadius.xl,
+      },
+    }),
+    ...screen("m", {
+      gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
+      alignItems: "center",
+      "::before": {
+        display: "none",
+      },
+    }),
+  },
 });
 
 // TODO: Even smaller width styles with overflow and scroll
@@ -34,13 +46,26 @@ export const layout = style({
 export const featuresList = style({
   display: "flex",
   columnGap: fluid.space("xs-s"),
-  justifyContent: "center",
+  marginInline: `calc(var(--fluid-edge-width) * -1)`,
   paddingInline: fluid.space("s-m"),
-  "@media": screen("m", {
-    flexDirection: "column",
-    gridColumn: "span 5",
-    paddingInline: 0,
-  }),
+  paddingBlockEnd: fluid.space("xs-s"),
+  position: "relative",
+  overflowX: "auto",
+  whiteSpace: "nowrap",
+  // FIXME: More elegant solution ??
+  "@media": {
+    ...screen(smallScreen, {
+      justifyContent: "center",
+      marginInline: 0,
+      paddingBlockEnd: 0,
+    }),
+    ...screen("m", {
+      flexDirection: "column",
+      gridColumn: "span 5",
+      paddingInline: 0,
+      whiteSpace: "normal",
+    }),
+  },
 });
 
 export const featureItem = style({
@@ -121,15 +146,24 @@ export const featureSeparateDescription = style({
 
 export const featureImage = style({
   display: "grid",
-  "@media": screen("m", {
-    gridColumn: "6 / span 7",
-    transform: "translateX(-2px)",
-  }),
+  overflowX: "hidden",
+  marginInlineEnd: `calc(var(--fluid-edge-width) * -1)`,
+  "@media": {
+    ...screen(smallScreen, {
+      overflowX: "visible",
+      marginInlineEnd: 0,
+    }),
+    ...screen("m", {
+      gridColumn: "6 / span 7",
+      transform: "translateX(-2px)",
+    }),
+  },
 });
 
 export const featureImageInner = style({
   borderRadius: vars.shape.borderRadius.xl,
   boxShadow: vars.shadow.xl,
+  minWidth: rem(640),
   overflow: "hidden",
   position: "relative",
   paddingBlockStart: (1464 / 2174) * 100 + "%",

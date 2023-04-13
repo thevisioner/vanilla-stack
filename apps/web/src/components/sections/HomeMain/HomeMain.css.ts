@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { transparentize } from "polished";
 import { fluid, vars, tokens } from "@/styles";
+import { screen } from "@/styles/utils.css";
 
 export const main = style({
   marginBlockStart: `calc(${fluid.space("2xl-3xl")} * 1.5)`,
@@ -9,9 +10,12 @@ export const main = style({
 });
 
 export const headline = style({
-  fontSize: `calc(${fluid.type("step-6")} * 1.125)`,
+  fontSize: `calc(${fluid.type("step-6")} * 0.875)`,
   maxWidth: vars.type.lineLength.narrow,
   marginInline: "auto",
+  "@media": screen("xs", {
+    fontSize: `calc(${fluid.type("step-6")} * 1.125)`,
+  }),
 });
 
 export const body = style({
@@ -24,7 +28,7 @@ export const body = style({
 export const emphasize = style({
   color: vars.color.primary,
   fontStyle: "normal",
-  whiteSpace: "nowrap",
+  // whiteSpace: "nowrap",
   position: "relative",
 });
 

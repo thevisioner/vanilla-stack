@@ -7,10 +7,12 @@ import { tokens } from "@/styles";
 type ScreenKey = keyof typeof tokens.screen;
 
 export default function useMatchScreenSize(
-  screen: ScreenKey,
+  screen: ScreenKey | number,
   defaultMatch = false
 ) {
-  const query = `screen and (min-width: ${em(tokens.screen[screen] + "px")})`;
+  const query = `screen and (min-width: ${em(
+    typeof screen === "number" ? screen : tokens.screen[screen] + "px"
+  )})`;
   const [match, setMatch] = useState(defaultMatch);
   useEffect(() => {
     function onMatchQueryChange(query: MediaQueryListEvent) {
