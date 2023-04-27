@@ -27,6 +27,9 @@ type InlineProps = {
   style?: React.CSSProperties;
 };
 
+/**
+ * Use to display children horizontally in a row. Based on CSS Flexbox.
+ */
 export default function Inline({
   as = "div",
   align,
@@ -34,6 +37,7 @@ export default function Inline({
   gap,
   rowGap,
   wrap = true,
+  // core props
   children,
   className,
   style,

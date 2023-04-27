@@ -25,6 +25,7 @@ export default function Stack({
   align,
   gap,
   reverse = false,
+  // core props
   children,
   className,
   style,

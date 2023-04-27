@@ -2,8 +2,9 @@ import clsx from "clsx";
 import * as styles from "./Text.css";
 
 type TextProps = {
-  /** The element type. Defaults to 'p'. */
+  /** The element type. Defaults to '<p>'. */
   as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "legend";
+
   /** HTML id attribute. */
   id?: string;
   /** Adjust horizontal alignment of text. */
@@ -24,11 +25,16 @@ type TextProps = {
   fontWeight?: styles.FontWeightVariants;
   /** Typographic style of text. Defaults to 'bodyM'. */
   variant?: styles.StyleVariants;
+
   // core props
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
 };
+
+/**
+ * Use to display text. Change the element type to adjust the semantic meaning and variant to adjust the typographic style.
+ */
 export default function Text({
   as: Component = "p",
   id,

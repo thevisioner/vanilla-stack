@@ -3,7 +3,7 @@ import { rem } from "polished";
 import { sprinkles, Sprinkles } from "@/styles/sprinkles.css";
 import * as styles from "./Columns.css";
 
-// TODO: add auto-fill and auto-fit
+// TODO: Add auto-fill and auto-fit
 
 type ColumsProps = {
   /** HTML Element type. Defaults to <div>. */
@@ -21,6 +21,10 @@ type ColumsProps = {
   className?: string;
   style?: React.CSSProperties;
 };
+
+/**
+ * Use to lay out children horizontally with equal gap between columns. Based on CSS Grid.
+ */
 export default function Colums({
   as = "div",
   align,
@@ -28,6 +32,7 @@ export default function Colums({
   gap,
   minWidth,
   autoFit,
+  // core props
   children,
   className,
   style,

@@ -57,6 +57,9 @@ type ButtonProps = {
   style?: React.CSSProperties;
 };
 
+/**
+ * Buttons are used primarily for actions, such as "Add", "Close", "Cancel", or "Save". Plain buttons, which look similar to links, are used for less important or less commonly used actions
+ */
 export default function Button({
   children,
   disabled,

@@ -13,10 +13,15 @@ type DividerProps = {
   className?: string;
   style?: React.CSSProperties;
 };
+
+/**
+ * Use to separate or group content.
+ */
 export default function Divider({
   as = "hr",
   marginBlock = "m",
   variant = "divider",
+  // core props
   className,
   style,
 }: DividerProps) {

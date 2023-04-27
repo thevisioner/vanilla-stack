@@ -12,22 +12,28 @@ interface BoxProps
   extends Omit<AllHTMLAttributes<HTMLElement>, "color">,
     Sprinkles {
   component?: ElementType;
+  /** HTML id attribute. */
   id?: string;
+  /** Border style. */
+  border?: styles.BorderVariants;
+
+  /** The aria-role attribute. */
   role?: string;
+  /* The tab-index attribute. */
   tabIndex?: number;
+
   // core props
   children?: ReactNode;
   className?: string;
   style?: CSSProperties;
-  // variants
-  border?: styles.BorderVariants;
 }
 
+/**
+ * Box is the most primitive layout component. It’s a way to access design tokens.
+ */
 export default function Box({
   component: Component = "div",
   id,
-  role,
-  tabIndex,
   // sprinkles
   backgroundColor,
   border,
@@ -44,6 +50,9 @@ export default function Box({
   paddingInline,
   paddingInlineStart,
   paddingInlineEnd,
+  // aria props
+  role,
+  tabIndex,
   // core porps
   children,
   className,
